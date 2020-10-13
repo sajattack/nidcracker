@@ -1,5 +1,4 @@
 use openssl::sha::sha1;
-//use sha1::{Sha1, Digest};
 use rayon::prelude::*;
 use rayon::iter::ParallelBridge;
 use std::fs::read_to_string;
@@ -23,9 +22,6 @@ fn main() {
 
     wordlist.par_iter().for_each(|word| {
         let test_string = module_name.to_string() + word;
-        //let mut hasher = Sha1::new();
-        //hasher.update(test_string.as_str().as_bytes());
-        //let hash = hasher.finalize();
         let hash = sha1(test_string.as_str().as_bytes());
         let test_nid = format!(
         "{:02X}{:02X}{:02X}{:02X}",
@@ -45,9 +41,6 @@ fn main() {
 
     wordlist_2perms.for_each(|perm| {
         let test_string = module_name.to_string() + perm[0] + perm[1];
-        //let mut hasher = Sha1::new();
-        //hasher.update(test_string.as_str().as_bytes());
-        //let hash = hasher.finalize();
         let hash = sha1(test_string.as_str().as_bytes());
 
         let test_nid = format!(
@@ -68,9 +61,6 @@ fn main() {
 
     wordlist_3perms.for_each(|perm| {
         let test_string = module_name.to_string() + perm[0] + perm[1] + perm[2];
-        //let mut hasher = Sha1::new();
-        //hasher.update(test_string.as_str().as_bytes());
-        //let hash = hasher.finalize();
         let hash = sha1(test_string.as_str().as_bytes());
 
         let test_nid = format!(
@@ -82,23 +72,14 @@ fn main() {
         }
     });
 
-    let mut wordlist_4perms = wordlist
+    let wordlist_4perms = wordlist
         .iter()
         .permutations(4)
         .par_bridge()
         .into_par_iter(); 
 
-    //for _ in 0..1_000_000_000 {
-        //let perm = wordlist_4perms.next().unwrap();
-        //let test_string = module_name.to_string() + perm[0] + perm[1] + perm[2] + perm[3]; 
-        //println!("{}", test_string);
-    //}
-
     wordlist_4perms.for_each(|perm| {
         let test_string = module_name.to_string() + perm[0] + perm[1] + perm[2] + perm[3];
-        //let mut hasher = Sha1::new();
-        //hasher.update(test_string.as_str().as_bytes());
-        //let hash = hasher.finalize();
         let hash = sha1(test_string.as_str().as_bytes());
         let test_nid = format!(
         "{:02X}{:02X}{:02X}{:02X}",
@@ -108,5 +89,4 @@ fn main() {
             println!("found match: {} = {}", test_nid, test_string);
         }
     });
-
 }
