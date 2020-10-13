@@ -1,0 +1,11 @@
+[package]
+name = "nidcracker"
+version = "0.1.0"
+authors = ["Paul Sajna <sajattack@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+openssl = "0.10"
+rayon = "1.4.1"
+itertools = "0.8.2"
+#sha-1 = { version="0.9.1", features=["asm"] }
