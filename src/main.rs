@@ -17,18 +17,15 @@ fn main() {
 
     let unknown_nids_string = read_to_string("unknown_nids.txt").unwrap();
     let unk_nids_split = unknown_nids_string.split('\n');
-    let unk_nids: Vec<&str> = unk_nids_split.collect();
-
+    let unk_nids: Vec<u32> = unk_nids_split.map(|s| u32::from_str_radix(s, 16).unwrap()).collect();
 
     wordlist.par_iter().for_each(|word| {
         let test_string = module_name.to_string() + word;
         let hash = sha1(test_string.as_str().as_bytes());
-        let test_nid = format!(
-        "{:02X}{:02X}{:02X}{:02X}",
-        hash[3], hash[2], hash[1], hash[0], 
-        );
-        if unk_nids.contains(&test_nid.as_str()) {
-            println!("found match: {} = {}", test_nid, test_string);
+        let hash4 = [hash[0], hash[1], hash[2], hash[3]];
+        let test_nid = u32::from_le_bytes(hash4);
+        if unk_nids.contains(&test_nid) {
+            println!("found match: {:08X} = {}", test_nid, test_string);
         }
     });
  
@@ -42,13 +39,10 @@ fn main() {
     wordlist_2perms.for_each(|perm| {
         let test_string = module_name.to_string() + perm[0] + perm[1];
         let hash = sha1(test_string.as_str().as_bytes());
-
-        let test_nid = format!(
-        "{:02X}{:02X}{:02X}{:02X}",
-        hash[3], hash[2], hash[1], hash[0], 
-        );
-        if unk_nids.contains(&test_nid.as_str()) {
-            println!("found match: {} = {}", test_nid, test_string);
+        let hash4 = [hash[0], hash[1], hash[2], hash[3]];
+        let test_nid = u32::from_le_bytes(hash4);
+        if unk_nids.contains(&test_nid) {
+            println!("found match: {:08X} = {}", test_nid, test_string);
         }
     });
  
@@ -62,13 +56,10 @@ fn main() {
     wordlist_3perms.for_each(|perm| {
         let test_string = module_name.to_string() + perm[0] + perm[1] + perm[2];
         let hash = sha1(test_string.as_str().as_bytes());
-
-        let test_nid = format!(
-        "{:02X}{:02X}{:02X}{:02X}",
-        hash[3], hash[2], hash[1], hash[0], 
-        );
-        if unk_nids.contains(&test_nid.as_str()) {
-            println!("found match: {} = {}", test_nid, test_string);
+        let hash4 = [hash[0], hash[1], hash[2], hash[3]];
+        let test_nid = u32::from_le_bytes(hash4);
+        if unk_nids.contains(&test_nid) {
+            println!("found match: {:08X} = {}", test_nid, test_string);
         }
     });
 
@@ -81,12 +72,10 @@ fn main() {
     wordlist_4perms.for_each(|perm| {
         let test_string = module_name.to_string() + perm[0] + perm[1] + perm[2] + perm[3];
         let hash = sha1(test_string.as_str().as_bytes());
-        let test_nid = format!(
-        "{:02X}{:02X}{:02X}{:02X}",
-        hash[3], hash[2], hash[1], hash[0], 
-        );
-        if unk_nids.contains(&test_nid.as_str()) {
-            println!("found match: {} = {}", test_nid, test_string);
+        let hash4 = [hash[0], hash[1], hash[2], hash[3]];
+        let test_nid = u32::from_le_bytes(hash4);
+        if unk_nids.contains(&test_nid) {
+            println!("found match: {:08X} = {}", test_nid, test_string);
         }
     });
 }
