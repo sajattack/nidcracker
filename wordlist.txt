@@ -62,8 +62,8 @@ Attr
 Au
 Audio
 Auth
-Auth1BB
-Auth2BB
+Auth1
+Auth2
 Auto
 Av
 Available
@@ -717,6 +717,7 @@ Sel
 Select
 Self
 Sema
+Semaphore
 Send
 Sendmsg
 Sendto

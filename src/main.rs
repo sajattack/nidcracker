@@ -25,6 +25,7 @@ fn main() {
                 println!("found match: {:08X} = {}", test_nid, test_string);
             }
         });
+        println!("Tested all 1 word permutations from wordlist for {}", module_name);
     
         let wordlist_2perms = wordlist
             .iter()
@@ -42,6 +43,7 @@ fn main() {
                 println!("found match: {:08X} = {}", test_nid, test_string);
             }
         });
+        println!("Tested all 2 word permutations from wordlist for {}", module_name);
     
         let wordlist_3perms = wordlist
             .iter()
@@ -59,6 +61,7 @@ fn main() {
                 println!("found match: {:08X} = {}", test_nid, test_string);
             }
         });
+        println!("Tested all 3 word permutations from wordlist for {}", module_name);
 
         let wordlist_4perms = wordlist
             .iter()
@@ -75,5 +78,6 @@ fn main() {
                 println!("found match: {:08X} = {}", test_nid, test_string);
             }
         });
+        println!("Tested all 4 word permutations from wordlist for {}", module_name);
     });
 }
